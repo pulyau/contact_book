@@ -9,8 +9,6 @@ http.createServer(function (req, res) {
     filename = "." + q.pathname;
   }
 
-  console.log(filename);
-
   fs.readFile(filename, function(err, data) {
     if (err) {
       res.writeHead(404, {'Content-Type': 'text/html'});
