@@ -1,21 +1,20 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
+const express = require("express")
+const path = require('path')
 
-http.createServer(function (req, res) {
-  var q = url.parse(req.url, true);
-  var filename = "./index.html"
-  if (q.pathname != '/'){
-    filename = "." + q.pathname;
-  }
+const app = express();
 
-  fs.readFile(filename, function(err, data) {
-    if (err) {
-      res.writeHead(404, {'Content-Type': 'text/html'});
-      return res.end("404 Not Found");
-    }  
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  });
-}).listen(8080);
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
+app.use(express.static('images'))
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, './views/index.html'))
+});
+
+app.get("/add_contact", (req, res) => {
+  res.sendFile(path.join(__dirname, './views/add_contact_form.html'))
+});
+
+app.listen(8080, () => {
+  console.log('Listening on port ' + 8080);
+});
