@@ -1,6 +1,7 @@
 const express = require("express")
 const path = require('path')
 var bodyParser = require('body-parser')
+var insertContact = require('./database/insert_contact') 
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/add_contact", (req, res) => {
 });
 
 app.post("/add_contact_request", urlencodedParser, (req,res) =>{
+  insertContact.insert_contact(req.body.fname, req.body.lname, req.body.email, req.body.phone);
   res.sendStatus(200);
 })
 

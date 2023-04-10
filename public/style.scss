@@ -1,5 +1,10 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 .primary-bg{
     text-align: center;
-    background-color: $indigo-800;
+    background-color: $indigo-200;
+    
+}
+
+body {
+    color: $light;
 }
