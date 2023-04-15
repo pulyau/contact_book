@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>PhoneBook</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="../style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.bttn {
+    text-align: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+</style>
+</head>
+
+<body>
+<div class="row justify-content-center">
+<div class ="col-lg-6 col-10 justify-content-center">
+    <div class ="container-fluid text-center">
+    <h1>PhoneBooK</h1>
+    <img src="/images/index/book.png"/>
+    </div>
+</div>
+</div>
+
+<div class="justify-content-center p-5">
+    <table class="table table-dark table-striped">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% contacts.forEach(contact => { %>
+                <tr>
+                    <th scope="row"><%= contact.id %></th>
+                    <td><%= contact.first_name %></td>
+                    <td><%= contact.last_name %></td>
+                    <td><%= contact.email %></td>
+                    <td><%= contact.phone %></td>
+                  </tr>
+              <% }) %>
+        </tbody>
+      </table>  
+</div>
+
+</body>
+</html>

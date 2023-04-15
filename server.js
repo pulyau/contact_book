@@ -1,7 +1,8 @@
 const express = require("express")
 const path = require('path')
 var bodyParser = require('body-parser')
-var insertContact = require('./database/insert_contact') 
+var insertContact = require('./database/insert_contact')
+var getContact = require('./database/get_contacts')
 
 const app = express();
 
@@ -17,12 +18,23 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use(express.static('public'))
 
+app.set('view engine', 'ejs');
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, './public/views/index.html'))
 });
 
 app.get("/add_contact", (req, res) => {
   res.sendFile(path.join(__dirname, './public/views/add_contact_form.html'))
+});
+
+app.get("/show_contacts", (req, res) => {
+  getContact.get_contacts()
+    .then(data => {
+      res.render(path.join(__dirname, './public/views/show_contacts.ejs'), {
+        contacts: data
+      })
+    })
 });
 
 app.post("/add_contact_request", urlencodedParser, (req,res) =>{
