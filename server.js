@@ -3,6 +3,7 @@ const path = require('path')
 var bodyParser = require('body-parser')
 var insertContact = require('./database/insert_contact')
 var getContact = require('./database/get_contacts')
+var delContact = require('./database/delete_contact')
 
 const app = express();
 
@@ -37,9 +38,16 @@ app.get("/show_contacts", (req, res) => {
     })
 });
 
+app.post("/delete_contact_request", urlencodedParser, (req, res) =>{
+  delContact.delete_contact(req.body.id);
+  //next('/show_contacts');
+  res.redirect('/show_contacts');
+  
+})
+
 app.post("/add_contact_request", urlencodedParser, (req,res) =>{
   insertContact.insert_contact(req.body.fname, req.body.lname, req.body.email, req.body.phone);
-  res.sendStatus(200);
+  res.redirect('/');
 })
 
 app.listen(8080, () => {

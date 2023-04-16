@@ -39,11 +39,18 @@
         <tbody>
             <% contacts.forEach(contact => { %>
                 <tr>
-                    <th scope="row"><%= contact.id %></th>
+                    <form action="/delete_contact_request" method="post" style="text-align: center;">
+                    <th scope="row" name="id"><%= contact.id %></th>
                     <td><%= contact.first_name %></td>
                     <td><%= contact.last_name %></td>
                     <td><%= contact.email %></td>
                     <td><%= contact.phone_number %></td>
+                    <td>
+                      
+                    <input type="image" src="/images/index/CloseButton.png" width="35px" height="35px">
+                    <input type="hidden" name="id" value="<%= contact.id %>">
+                    </form>
+                    </td>
                   </tr>
               <% }) %>
         </tbody>

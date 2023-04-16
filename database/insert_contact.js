@@ -1,7 +1,6 @@
 const { pool } = require("./connection");
 
 async function insert_contact(fname, lname, email, phone) {
-    console.log(fname);
     try {
         const res = await pool.query(
             "INSERT INTO contacts (first_name, last_name, email, phone_number) \
